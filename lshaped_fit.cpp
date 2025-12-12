@@ -14,6 +14,7 @@ ALGORITHM OVERVIEW
     The algorithm rotates a coordinate system, measures how tightly the points form an L-shape at each angle,
     and chooses the angle that gives the tightest rectangle around the projected points.
 */
+#define M_PI 3.14159265358979323846
 
  namespace geo {
 LShapedFIT::LShapedFIT() {
