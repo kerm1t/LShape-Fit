@@ -1,5 +1,6 @@
-#include "lshaped_fit.h"
 #include <iostream>
+#include "lshaped_fit.h"
+#include "lshaped_fit_x86.h"
 
 /*
 PROBLEM CONTEXT
@@ -125,11 +126,15 @@ RotatedRect LShapedFIT::FitBox(std::vector<Point2f>* pointcloud_ptr)
     Mat c1(points.size(), 1);
     Mat c2(points.size(), 1);
 
-    for (size_t i = 0; i < points.size(); i++) {
-        double x = Matrix_pts.at(i,0);
-        double y = Matrix_pts.at(i,1);
-        c1.at(i,0) = x*c + y*s;
-        c2.at(i,0) = -x*s + y*c;
+    if (cpuHasAVX2()) projectPointsAVX2(Matrix_pts, c1, c2, c, s);
+    else {
+        // scalar fallback
+        for (size_t i = 0; i < points.size(); i++) {
+            double x = Matrix_pts.at(i,0);
+            double y = Matrix_pts.at(i,1);
+            c1.at(i,0) = x*c + y*s;
+            c2.at(i,0) = -x*s + y*c;
+        }
     }
 
     // find min/max
