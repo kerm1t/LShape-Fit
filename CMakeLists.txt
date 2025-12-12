@@ -5,4 +5,4 @@ project(L-Shapefit)
 
 include_directories(.)
 
-add_executable(${PROJECT_NAME} lshaped_fit.cpp lshaped_fit.h test_lshaped_fitting.cpp)
+add_executable(${PROJECT_NAME} lshaped_fit.hpp test_lshaped_fitting.cpp)

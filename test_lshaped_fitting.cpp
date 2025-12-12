@@ -1,6 +1,6 @@
 #include <string>
-#include "lshaped_fit.h"
 #include <iostream>
+#include "lshaped_fit.hpp"
 
 int main(int argc, char** argv)
 {
